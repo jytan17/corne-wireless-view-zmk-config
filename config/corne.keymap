@@ -30,13 +30,13 @@
 // |  TAB |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  ;  | DEL  |
 // |  ESC |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  | ENT  |
 // | SK⌥  |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  | SK⇧  |
-//                    | SK⌃ | MO1 | SPC |   | BSPC| MO2 | SK⌘ |
+//                    | SK⌃ | SPC | MO1 |   | MO2 | BSPC| SK⌘ |
                         display-name = "Base";
                         bindings = <
    &kp TAB   &kp Q     &kp W  &kp F     &kp P     &kp B          &kp J     &kp L  &kp U     &kp Y   &kp SEMI &kp DEL
    &kp ESC   &kp A     &kp R  &kp S     &kp T     &kp G          &kp M     &kp N  &kp E     &kp I   &kp O    &kp RET
    &sk LALT  &kp Z     &kp X  &kp C     &kp D     &kp V          &kp K     &kp H  &kp COMMA &kp DOT &kp FSLH &sk RSHFT
-                              &sk LCTRL &mo L1    &kp SPACE      &kp BSPC  &mo L2 &sk LGUI
+                              &sk LCTRL &kp SPACE &mo L1         &mo L2    &kp BSPC &sk LGUI
                         >;
                 };
 
