@@ -1,0 +1,11 @@
+build/
+.west/
+
+# west-managed external sources (do not commit)
+modules/
+zephyr/
+zmk/
+
+# firmware build artifacts
+firmware/*.uf2
+firmware/*.log

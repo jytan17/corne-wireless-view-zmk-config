@@ -14,57 +14,49 @@
 #define L3   3
 
 / {
-        conditional_layers {
-                compatible = "zmk,conditional-layers";
-                tri_layer {
-                        if-layers = <L1 L2>;
-                        then-layer = <L3>;
-                };
-        };
-
         keymap {
                 compatible = "zmk,keymap";
 
                 base_layer {
 // -----------------------------------------------------------------------------------------
 // |  TAB |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  ;  | DEL  |
-// |  ESC |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  | ENT  |
-// | SK⌥  |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  | SK⇧  |
-//                    | SK⌃ | SPC | MO1 |   | MO2 | BSPC| SK⌘ |
+// |ESC/⌃ |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  |  '   |
+// | SK⌥  |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  | SK⌘  |
+//                    | ENT | SPC | MO1 |   | MO2 | BSPC| SK⇧ |
                         display-name = "Base";
                         bindings = <
-   &kp TAB   &kp Q     &kp W  &kp F     &kp P     &kp B          &kp J     &kp L  &kp U     &kp Y   &kp SEMI &kp DEL
-   &kp ESC   &kp A     &kp R  &kp S     &kp T     &kp G          &kp M     &kp N  &kp E     &kp I   &kp O    &kp RET
-   &sk LALT  &kp Z     &kp X  &kp C     &kp D     &kp V          &kp K     &kp H  &kp COMMA &kp DOT &kp FSLH &sk RSHFT
-                              &sk LCTRL &kp SPACE &mo L1         &mo L2    &kp BSPC &sk LGUI
+   &kp TAB         &kp Q     &kp W  &kp F     &kp P     &kp B          &kp J     &kp L  &kp U     &kp Y   &kp SEMI &kp DEL
+   &mt LCTRL ESC   &kp A     &kp R  &kp S     &kp T &kp G      &kp M     &kp N  &kp E     &kp I   &kp O    &kp SQT
+   &sk LALT        &kp Z     &kp X  &kp C     &kp D     &kp V          &kp K     &kp H  &kp COMMA &kp DOT &kp FSLH &sk LGUI
+                                    &kp RET   &kp SPACE &sl L1         &sl L2    &kp BSPC &sk RSHFT
                         >;
                 };
 
                 l1_num_nav {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  ▽  | HOME|  ↑  | END | PGUP|   |  /  |  7  |  8  |  9  |  *  |  -   |
-// |  ESC |  ▽  |  ←  |  ↓  |  →  | PGDN|   |  .  |  4  |  5  |  6  |  +  |  =   |
-// |  ▽   |  ▽  |  ▽  |  ▽  | CAPW| SCRN|   |  0  |  1  |  2  |  3  |  ,  | ENT  |
+// | SL3  |  ▽  | HOME|  ↑  | END | PGUP|   |  /  |  7  |  8  |  9  |  *  |  -   |
+// |  ▽   |  ▽  |  ←  |  ↓  |  →  | PGDN|   |  .  |  4  |  5  |  6  |  +  |  =   |
+// |  ▽   | SK⇧ | SK⌘ |  ▽  | CAPW| SCRN|   |  0  |  1  |  2  |  3  |  ▽  | ENT  |
 //                    |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |
                         display-name = "L1 Num+Nav";
                         bindings = <
-   &kp TAB   &trans    &kp HOME &kp UP    &kp END   &kp PG_UP        &kp FSLH &kp N7 &kp N8    &kp N9  &kp STAR  &kp MINUS
-   &kp ESC   &trans    &kp LEFT &kp DOWN  &kp RIGHT &kp PG_DN        &kp DOT  &kp N4 &kp N5    &kp N6  &kp PLUS  &kp EQUAL
-   &trans    &trans    &trans   &trans    &caps_word &kp LG(LS(N4))  &kp N0   &kp N1 &kp N2    &kp N3  &kp COMMA &kp RET
+   &sl L3    &trans    &kp HOME &kp UP    &kp END   &kp PG_UP        &kp FSLH &kp N7 &kp N8    &kp N9  &kp STAR  &kp MINUS
+   &trans    &trans    &kp LEFT &kp DOWN  &kp RIGHT &kp PG_DN        &kp DOT  &kp N4 &kp N5    &kp N6  &kp PLUS  &kp EQUAL
+   &trans    &sk LSHFT &sk LGUI &trans    &caps_word &kp LG(LS(N4))  &kp N0   &kp N1 &kp N2    &kp N3  &trans    &kp RET
                                 &trans    &trans    &trans           &trans   &trans &trans
                         >;
                 };
 
                 l2_sym {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  =  |  |  |  `   |
-// |  ESC |  \  |  {  |  [  |  (  |  +  |   |  <  |  ?  |  _  |  :  |  ;  |  '   |
+// |  ▽   |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  =  |  |  |  `   |
+// |  ▽   |  \  |  {  |  [  |  (  |  +  |   |  <  |  ?  |  _  |  :  |  ;  |  '   |
 // |  ▽   |  ~  |  }  |  ]  |  )  |  -  |   |  >  |  "  |  ,  |  .  |  /  |  ▽   |
 //                    |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |
                         display-name = "L2 Sym";
                         bindings = <
-   &kp TAB   &kp EXCL  &kp AT   &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp STAR  &kp EQUAL &kp PIPE  &kp GRAVE
-   &kp ESC   &kp BSLH  &kp LBRC &kp LBKT  &kp LPAR  &kp PLUS       &kp LT    &kp QMARK &kp UNDER &kp COLON &kp SEMI  &kp SQT
+   &trans    &kp EXCL  &kp AT   &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp STAR  &kp EQUAL &kp PIPE  &kp GRAVE
+   &trans    &kp BSLH  &kp LBRC &kp LBKT  &kp LPAR  &kp PLUS       &kp LT    &kp QMARK &kp UNDER &kp COLON &kp SEMI  &kp SQT
    &trans    &kp TILDE &kp RBRC &kp RBKT  &kp RPAR  &kp MINUS      &kp GT    &kp DQT   &kp COMMA &kp DOT   &kp FSLH  &trans
                                 &trans    &trans    &trans         &trans    &trans    &trans
                         >;

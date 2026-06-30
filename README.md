@@ -1,15 +1,17 @@
-# WIP Layout — Last Agreed
+# Corne Keymap
 
-Personal Corne keymap target. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas.
+Personal Corne keymap. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas. ZMK Studio enabled (left side).
+
+This README documents the **current** layout. It is versioned alongside `config/corne.keymap` — each layout iteration updates both.
 
 ## Conventions
 
+- `ESC/⌃` — mod-tap: tap = ESC, hold = ⌃
 - `SK ⌃ ⌘ ⌥ ⇧` — sticky mod (tap = oneshot, hold = held mod)
-- `MO 1` `MO 2` — momentary layer hold
-- L3 ADJUST = tri-state (hold `MO 1` + `MO 2`)
+- `SL 1` `SL 2` `SL 3` — sticky layer (tap = next-key on layer, hold = momentary)
 - `▽` — transparent (falls through to base)
 - `CAPW` — caps_word
-- `SCRN` — cmd+shift+4 (mac screenshot)
+- `SCRN` — `⌘+⇧+4` (mac screenshot)
 
 ---
 
@@ -19,41 +21,44 @@ Personal Corne keymap target. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alp
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
 │ TAB │  Q  │  W  │  F  │  P  │  B  │    │  J  │  L  │  U  │  Y  │  ;  │ DEL │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│ ESC │  A  │  R  │  S  │  T  │  G  │    │  M  │  N  │  E  │  I  │  O  │ ENT │
+│ESC/⌃│  A  │  R  │  S  │  T  │  G  │    │  M  │  N  │  E  │  I  │  O  │  '  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│SK ⌥ │  Z  │  X  │  C  │  D  │  V  │    │  K  │  H  │  ,  │  .  │  /  │SK ⇧ │
+│SK ⌥ │  Z  │  X  │  C  │  D  │  V  │    │  K  │  H  │  ,  │  .  │  /  │SK ⌘ │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │SK ⌃ │MO 1 │ SPC │    │BSPC │MO 2 │SK ⌘ │
+                  │ ENT │ SPC │SL 1 │    │SL 2 │BSPC │SK ⇧ │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
+Thumbs L→R: `ENT` · `SPC` · `SL 1` ‖ `SL 2` · `BSPC` · `SK ⇧`
+
 ---
 
-## L1 — Num + Nav (hold MO 1)
+## L1 — Num + Nav (tap `SL 1` sticky, or hold)
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│ TAB │  ▽  │HOME │ ↑   │ END │PGUP │    │  /  │  7  │  8  │  9  │  *  │  -  │
+│SL 3 │  ▽  │HOME │ ↑   │ END │PGUP │    │  /  │  7  │  8  │  9  │  *  │  -  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│ ESC │  ▽  │ ←   │ ↓   │ →   │PGDN │    │  .  │  4  │  5  │  6  │  +  │  =  │
+│  ▽  │  ▽  │ ←   │ ↓   │ →   │PGDN │    │  .  │  4  │  5  │  6  │  +  │  =  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  ▽  │  ▽  │  ▽  │CAPW │SCRN │    │  0  │  1  │  2  │  3  │  ,  │ ENT │
+│  ▽  │SK ⇧ │SK ⌘ │  ▽  │CAPW │SCRN │    │  0  │  1  │  2  │  3  │  ▽  │ ENT │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │ ▽   │ ▽   │ ▽   │    │BSPC │ ▽   │ ▽   │
+                  │ ▽   │ ▽   │ ▽   │    │ ▽   │ ▽   │ ▽   │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
-Free slots (left): `Q top`, `A mid`, `Z bot`, `X bot`, `C bot` — TBD.
+- `Z bot` = `SK ⇧`, `X bot` = `SK ⌘` — mouse-chord mods (right hand on mouse, tap SL 1 → tap mod → click)
+- `SL 3` top-left = sole access path to L3 (tap SL 1 → tap SL 3 → tap target, layer auto-clears)
 
 ---
 
-## L2 — Sym (hold MO 2)
+## L2 — Sym (tap `SL 2` sticky, or hold)
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│ TAB │  !  │  @  │  #  │  $  │  %  │    │  ^  │  &  │  *  │  =  │  |  │  `  │
+│  ▽  │  !  │  @  │  #  │  $  │  %  │    │  ^  │  &  │  *  │  =  │  |  │  `  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│ ESC │  \  │  {  │  [  │  (  │  +  │    │  <  │  ?  │  _  │  :  │  ;  │  '  │
+│  ▽  │  \  │  {  │  [  │  (  │  +  │    │  <  │  ?  │  _  │  :  │  ;  │  '  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
 │  ▽  │  ~  │  }  │  ]  │  )  │  -  │    │  >  │  "  │  ,  │  .  │  /  │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
@@ -63,7 +68,7 @@ Free slots (left): `Q top`, `A mid`, `Z bot`, `X bot`, `C bot` — TBD.
 
 ---
 
-## L3 — Adjust (tri-state: hold MO 1 + MO 2)
+## L3 — Adjust (via L1 → `SL 3`)
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
@@ -79,22 +84,24 @@ Free slots (left): `Q top`, `A mid`, `Z bot`, `X bot`, `C bot` — TBD.
 
 ---
 
-## Combos
-
-None currently.
-
-## Open Concerns
-
-- `'` (apostrophe) not on base — English contractions need MO 2 chord
-- TAB / ESC on left outer column = pinky reach
-- SK ⌘ on right outer thumb = sustained cmd-hold awkward
-- DEL on top-right outer pinky corner
-- MO 1 and SK ⌃ adjacent left thumbs = fat-finger risk
-- 5 free L1 slots TBD
-
 ## Notes
 
 - **Aerospace**: hold `SK ⌥` (left pinky) + mash hjkl on right hand → cross-hand chord
-- **Tmux prefix** `C-Space`: tap `SK ⌃` (left mid thumb) → tap SPACE
-- **Sticky stacking**: tap `SK ⌘`, tap `SK ⇧`, tap letter → cmd+shift+letter
+- **Tmux prefix** `⌃+SPC`: hold `ESC/⌃` (left outer mid) → tap SPACE
+- **Sticky stacking**: tap `SK ⌘`, tap `SK ⇧`, tap letter → ⌘+⇧+letter
 - **Hold sticky for repeat**: holding the sticky key = acts as held mod
+
+## Build / flash
+
+- Docker: `zmkfirmware/zmk-build-arm:stable`. West workspace already at repo root (`.west/` + `zmk/` + `zephyr/` + `modules/` cloned).
+- Build: `docker run --rm -v $PWD:/workspace -w /workspace zmkfirmware/zmk-build-arm:stable bash -c 'west build -d build/left ...'`
+- Outputs to `firmware/*.uf2`
+- Flash: double-tap reset on half → `NICENANO` mounts → `cp firmware/corne_<side>.uf2 /Volumes/NICENANO/`
+- ZMK Studio enabled on left (snippet `studio-rpc-usb-uart`) — direct flash works for keymap updates, no settings_reset needed
+
+## Open concerns
+
+- TAB / ESC on left outer column = pinky reach
+- `SK ⌘` on right outer bot pinky = sustained cmd-hold awkward
+- DEL on top-right outer pinky corner
+- `ESC/⌃` mod-tap: tune flavor (`tap-preferred` default), watch for misfires on vim `<C-…>` chords
