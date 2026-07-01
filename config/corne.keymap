@@ -8,72 +8,176 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-#define BASE 0
-#define L1   1
-#define L2   2
-#define L3   3
+#define BASE  0
+#define NAV   1
+#define SYM_L 2
+#define NUM   3
+#define SYM_R 4
+
+#define HYPER LS(LC(LA(LGUI)))
+
+// Key positions (Corne 42-key)
+// Row 0:   0   1   2   3   4   5    |   6   7   8   9  10  11
+// Row 1:  12  13  14  15  16  17    |  18  19  20  21  22  23
+// Row 2:  24  25  26  27  28  29    |  30  31  32  33  34  35
+// Thumb:              36  37  38    |  39  40  41
+#define KEYS_LEFT  0  1  2  3  4  5  12 13 14 15 16 17  24 25 26 27 28 29
+#define KEYS_RIGHT 6  7  8  9 10 11  18 19 20 21 22 23  30 31 32 33 34 35
+#define THUMBS_L   36 37 38
+#define THUMBS_R   39 40 41
 
 / {
+        behaviors {
+                // HRM left: triggers on right-hand presses only
+                hml: home_row_mod_left {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <200>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <150>;
+                        bindings = <&kp>, <&kp>;
+                        hold-trigger-key-positions = <KEYS_RIGHT THUMBS_R>;
+                        hold-trigger-on-release;
+                };
+                // HRM right: triggers on left-hand presses only
+                hmr: home_row_mod_right {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <200>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <150>;
+                        bindings = <&kp>, <&kp>;
+                        hold-trigger-key-positions = <KEYS_LEFT THUMBS_L>;
+                        hold-trigger-on-release;
+                };
+                // Layer tap-hold: tap = sticky-layer, hold = momentary
+                lth: layer_tap_hold {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "tap-preferred";
+                        tapping-term-ms = <200>;
+                        bindings = <&mo>, <&sl>;
+                };
+                // Sticky mod with quick-release (holding acts as held mod)
+                skq: sticky_mod_quick {
+                        compatible = "zmk,behavior-sticky-key";
+                        #binding-cells = <1>;
+                        bindings = <&kp>;
+                        release-after-ms = <1000>;
+                        quick-release;
+                };
+        };
+
+        macros {
+                m_arrow: m_arrow {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp MINUS &kp GT>;
+                };
+                m_fatarrow: m_fatarrow {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp EQUAL &kp GT>;
+                };
+                m_notequal: m_notequal {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp EXCL &kp EQUAL>;
+                };
+                m_lteq: m_lteq {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp LT &kp EQUAL>;
+                };
+                m_eqeq: m_eqeq {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp EQUAL &kp EQUAL>;
+                };
+                m_gteq: m_gteq {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp GT &kp EQUAL>;
+                };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
                 base_layer {
 // -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  ;  | DEL  |
-// |ESC/⌃ |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  |  '   |
-// | SK⌥  |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  | SK⌘  |
-//                    | ENT | SPC | MO1 |   | MO2 | BSPC| SK⇧ |
+// | TAB |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  '  | DEL  |
+// | ESC |A/⌘  |R/⌥  |S/⇧  |T/⌃  |  G  |   |  M  |N/⌃  |E/⇧  |I/⌥  |O/⌘  | ENT  |
+// | HYP |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  | CAPW |
+//                   | LT4 | SPC | LT1 |   | LT2 |BSPC | LT3 |
                         display-name = "Base";
                         bindings = <
-   &kp TAB         &kp Q     &kp W  &kp F     &kp P     &kp B          &kp J     &kp L  &kp U     &kp Y   &kp SEMI &kp DEL
-   &mt LCTRL ESC   &kp A     &kp R  &kp S     &kp T &kp G      &kp M     &kp N  &kp E     &kp I   &kp O    &kp SQT
-   &sk LALT        &kp Z     &kp X  &kp C     &kp D     &kp V          &kp K     &kp H  &kp COMMA &kp DOT &kp FSLH &sk LGUI
-                                    &kp RET   &kp SPACE &sl L1         &sl L2    &kp BSPC &sk RSHFT
+   &kp TAB     &kp Q       &kp W       &kp F       &kp P       &kp B            &kp J     &kp L       &kp U       &kp Y       &kp SQT     &kp DEL
+   &kp ESC     &hml LGUI A &hml LALT R &hml LSHFT S &hml LCTRL T &kp G           &kp M     &hmr LCTRL N &hmr LSHFT E &hmr LALT I &hmr LGUI O &kp RET
+   &kp HYPER   &kp Z       &kp X       &kp C       &kp D       &kp V            &kp K     &kp H       &kp COMMA   &kp DOT     &kp FSLH    &caps_word
+                                       &lth NAV NAV &kp SPACE &lth SYM_R SYM_R        &lth SYM_L SYM_L &kp BSPC &lth NUM NUM
                         >;
                 };
 
-                l1_num_nav {
+                nav_layer {
 // -----------------------------------------------------------------------------------------
-// | SL3  |  ▽  | HOME|  ↑  | END | PGUP|   |  /  |  7  |  8  |  9  |  *  |  -   |
-// |  ▽   |  ▽  |  ←  |  ↓  |  →  | PGDN|   |  .  |  4  |  5  |  6  |  +  |  =   |
-// |  ▽   | SK⇧ | SK⌘ |  ▽  | CAPW| SCRN|   |  0  |  1  |  2  |  3  |  ▽  | ENT  |
-//                    |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |
-                        display-name = "L1 Num+Nav";
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   | RDO | PST | CPY | CUT | UND |  ▽   |
+// |  ▽  |SK⌘  |SK⌥  |SK⇧  |SK⌃  |CAPS |   |  ←  |  ↓  |  ↑  |  →  | INS |  ▽   |
+// |  ▽  |  ·  | BT0 | BT1 | BT2 | BCL |   |HOME |PGDN |PGUP | END |  ·  |  ▽   |
+//                   |  ·  |  ▽  |  ▽  |   |MUTE |VOL- |VOL+ |
+                        display-name = "Nav";
                         bindings = <
-   &sl L3    &trans    &kp HOME &kp UP    &kp END   &kp PG_UP        &kp FSLH &kp N7 &kp N8    &kp N9  &kp STAR  &kp MINUS
-   &trans    &trans    &kp LEFT &kp DOWN  &kp RIGHT &kp PG_DN        &kp DOT  &kp N4 &kp N5    &kp N6  &kp PLUS  &kp EQUAL
-   &trans    &sk LSHFT &sk LGUI &trans    &caps_word &kp LG(LS(N4))  &kp N0   &kp N1 &kp N2    &kp N3  &trans    &kp RET
-                                &trans    &trans    &trans           &trans   &trans &trans
+   &trans  &none      &none      &none      &none      &none              &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)  &trans
+   &trans  &skq LGUI  &skq LALT  &skq LSHFT &skq LCTRL &caps_word         &kp LEFT      &kp DOWN   &kp UP     &kp RIGHT  &kp INS    &trans
+   &trans  &none      &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_CLR   &kp HOME      &kp PG_DN  &kp PG_UP  &kp END    &none      &trans
+                                 &none      &trans     &trans             &kp C_MUTE    &kp C_VOL_DN &kp C_VOL_UP
                         >;
                 };
 
-                l2_sym {
+                sym_l_layer {
 // -----------------------------------------------------------------------------------------
-// |  ▽   |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  =  |  |  |  `   |
-// |  ▽   |  \  |  {  |  [  |  (  |  +  |   |  <  |  ?  |  _  |  :  |  ;  |  '   |
-// |  ▽   |  ~  |  }  |  ]  |  )  |  -  |   |  >  |  "  |  ,  |  .  |  /  |  ▽   |
-//                    |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |
-                        display-name = "L2 Sym";
+// |  ▽  |  !  |  @  |  #  |  $  |  %  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+// |  ▽  |  \  |  {  |  [  |  (  |  +  |   |  ·  |SK⌃  |SK⇧  |SK⌥  |SK⌘  |  ▽   |
+// |  ▽  |  ~  |  }  |  ]  |  )  |  -  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+//                   | ->  | =>  | !=  |   |  ▽  |  ▽  |  ▽  |
+                        display-name = "Sym L";
                         bindings = <
-   &trans    &kp EXCL  &kp AT   &kp HASH  &kp DLLR  &kp PRCNT      &kp CARET &kp AMPS  &kp STAR  &kp EQUAL &kp PIPE  &kp GRAVE
-   &trans    &kp BSLH  &kp LBRC &kp LBKT  &kp LPAR  &kp PLUS       &kp LT    &kp QMARK &kp UNDER &kp COLON &kp SEMI  &kp SQT
-   &trans    &kp TILDE &kp RBRC &kp RBKT  &kp RPAR  &kp MINUS      &kp GT    &kp DQT   &kp COMMA &kp DOT   &kp FSLH  &trans
-                                &trans    &trans    &trans         &trans    &trans    &trans
+   &trans  &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT       &none      &none      &none      &none      &none      &trans
+   &trans  &kp BSLH   &kp LBRC   &kp LBKT   &kp LPAR   &kp PLUS        &none      &skq LCTRL &skq LSHFT &skq LALT  &skq LGUI  &trans
+   &trans  &kp TILDE  &kp RBRC   &kp RBKT   &kp RPAR   &kp MINUS       &none      &none      &none      &none      &none      &trans
+                                 &m_arrow   &m_fatarrow &m_notequal    &trans     &trans     &trans
                         >;
                 };
 
-                l3_adjust {
+                num_layer {
 // -----------------------------------------------------------------------------------------
-// |  F1  | F2  | F3  | F4  | F5  | F6  |   | F7  | F8  | F9  | F10 | F11 | F12  |
-// |BTCLR | BT0 | BT1 | BT2 | BT3 | BT4 |   |MUTE |VOL- |VOL+ |PREV |PLAY |NEXT  |
-// |RESET | BOOT|  ▽  |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |  ▽  |BOOT |RESET |
-//                    |  ▽  |  ▽  |  ▽  |   |  ▽  |  ▽  |  ▽  |
-                        display-name = "L3 Adjust";
+// |  ▽  |  [  |  7  |  8  |  9  |  ]  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+// |  ▽  |  ;  |  4  |  5  |  6  |  =  |   |  ·  |SK⌃  |SK⇧  |SK⌥  |SK⌘  |  ▽   |
+// |  ▽  |  `  |  1  |  2  |  3  |  \  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+//                   |  .  |  0  |  -  |   |  ▽  |  ▽  |  ▽  |
+                        display-name = "Num";
                         bindings = <
-   &kp F1      &kp F2       &kp F3       &kp F4       &kp F5       &kp F6           &kp F7     &kp F8       &kp F9       &kp F10    &kp F11      &kp F12
-   &bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4     &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_PREV &kp C_PP     &kp C_NEXT
-   &sys_reset  &bootloader  &trans       &trans       &trans       &trans           &trans     &trans       &trans       &trans     &bootloader  &sys_reset
-                                         &trans       &trans       &trans           &trans     &trans       &trans
+   &trans  &kp LBKT   &kp N7     &kp N8     &kp N9     &kp RBKT        &none      &none      &none      &none      &none      &trans
+   &trans  &kp SEMI   &kp N4     &kp N5     &kp N6     &kp EQUAL       &none      &skq LCTRL &skq LSHFT &skq LALT  &skq LGUI  &trans
+   &trans  &kp GRAVE  &kp N1     &kp N2     &kp N3     &kp BSLH        &none      &none      &none      &none      &none      &trans
+                                 &kp DOT    &kp N0     &kp MINUS       &trans     &trans     &trans
+                        >;
+                };
+
+                sym_r_layer {
+// -----------------------------------------------------------------------------------------
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   |  ^  |  &  |  *  |  =  |  |  |  `   |
+// |  ▽  |SK⌘  |SK⌥  |SK⇧  |SK⌃  |  ·  |   |  <  |  ?  |  _  |  :  |  ;  |  '   |
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   |  >  |  "  |  ,  |  .  |  /  |  ▽   |
+//                   |  ▽  |  ▽  |  ▽  |   | <=  | ==  | >=  |
+                        display-name = "Sym R";
+                        bindings = <
+   &trans  &none      &none      &none      &none      &none           &kp CARET &kp AMPS   &kp STAR   &kp EQUAL  &kp PIPE   &kp GRAVE
+   &trans  &skq LGUI  &skq LALT  &skq LSHFT &skq LCTRL &none           &kp LT    &kp QMARK  &kp UNDER  &kp COLON  &kp SEMI   &kp SQT
+   &trans  &none      &none      &none      &none      &none           &kp GT    &kp DQT    &kp COMMA  &kp DOT    &kp FSLH   &trans
+                                 &trans     &trans     &trans          &m_lteq   &m_eqeq    &m_gteq
                         >;
                 };
 

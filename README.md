@@ -1,17 +1,32 @@
 # Corne Keymap
 
-Personal Corne keymap. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas. ZMK Studio enabled (left side).
+Personal Corne keymap. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas. ZMK Studio enabled (left side). Miryoku-inspired: home-row mods, sticky everything, split sym layers.
 
-This README documents the **current** layout. It is versioned alongside `config/corne.keymap` — each layout iteration updates both.
+This README documents the **current** layout. Versioned alongside `config/corne.keymap` — each layout iteration updates both.
 
 ## Conventions
 
-- `ESC/⌃` — mod-tap: tap = ESC, hold = ⌃
-- `SK ⌃ ⌘ ⌥ ⇧` — sticky mod (tap = oneshot, hold = held mod)
-- `SL 1` `SL 2` `SL 3` — sticky layer (tap = next-key on layer, hold = momentary)
+- `HRM` — home-row mod (hold home-row letter = mod, tap = letter). GASC mapping (⌃ on index).
+- `SK ⌘ ⌥ ⌃ ⇧` — sticky mod (tap = oneshot for next key, hold = held mod)
+- `LT N` — layer tap-hold (tap = sticky-layer for next key, hold = momentary layer)
+- `HYP` — Hyper (⌘+⌥+⌃+⇧) for app-launcher / window manager
+- `CAPW` — caps_word (auto-shift letters until space/punct)
+- `->` `=>` `!=` `<=` `==` `>=` — macros (emit multiple keys)
 - `▽` — transparent (falls through to base)
-- `CAPW` — caps_word
-- `SCRN` — `⌘+⇧+4` (mac screenshot)
+- `·` — none / blank
+
+## Thumb cluster
+
+Sym layers on **inner** (big) thumbs, mirrored. NAV on left-outer.
+
+| Position    | Tap / Hold        | Notes                            |
+|-------------|-------------------|----------------------------------|
+| Left-outer  | `LT 1` NAV        | Right hand active when held      |
+| Left-mid    | `SPC` plain       |                                  |
+| Left-inner  | `LT 4` SYM_R      | Right hand active when held      |
+| Right-inner | `LT 2` SYM_L      | Left hand active when held       |
+| Right-mid   | `BSPC` plain      |                                  |
+| Right-outer | `LT 3` NUM        | Left hand active when held       |
 
 ---
 
@@ -19,89 +34,165 @@ This README documents the **current** layout. It is versioned alongside `config/
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│ TAB │  Q  │  W  │  F  │  P  │  B  │    │  J  │  L  │  U  │  Y  │  ;  │ DEL │
+│ TAB │  Q  │  W  │  F  │  P  │  B  │    │  J  │  L  │  U  │  Y  │  '  │ DEL │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│ESC/⌃│  A  │  R  │  S  │  T  │  G  │    │  M  │  N  │  E  │  I  │  O  │  '  │
+│ ESC │  A  │  R  │  S  │  T  │  G  │    │  M  │  N  │  E  │  I  │  O  │ ENT │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│SK ⌥ │  Z  │  X  │  C  │  D  │  V  │    │  K  │  H  │  ,  │  .  │  /  │SK ⌘ │
+│ HYP │  Z  │  X  │  C  │  D  │  V  │    │  K  │  H  │  ,  │  .  │  /  │CAPW │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │ ENT │ SPC │SL 1 │    │SL 2 │BSPC │SK ⇧ │
+                  │LT 1 │ SPC │LT 4 │    │LT 2 │BSPC │LT 3 │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
-Thumbs L→R: `ENT` · `SPC` · `SL 1` ‖ `SL 2` · `BSPC` · `SK ⇧`
+HRM (hold home-row key):
+
+```
+  A=⌘   R=⌥   S=⇧   T=⌃                  N=⌃   E=⇧   I=⌥   O=⌘
+```
 
 ---
 
-## L1 — Num + Nav (tap `SL 1` sticky, or hold)
+## L1 — NAV (hold left-outer thumb; right hand types)
+
+Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs. Bluetooth on left bottom row. Left home row = SK mod mirror.
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│SL 3 │  ▽  │HOME │ ↑   │ END │PGUP │    │  /  │  7  │  8  │  9  │  *  │  -  │
+│  ▽  │  ·  │  ·  │  ·  │  ·  │  ·  │    │ RDO │ PST │ CPY │ CUT │ UND │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  ▽  │ ←   │ ↓   │ →   │PGDN │    │  .  │  4  │  5  │  6  │  +  │  =  │
+│  ▽  │SK ⌘ │SK ⌥ │SK ⇧ │SK ⌃ │CAPS │    │  ←  │  ↓  │  ↑  │  →  │ INS │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │SK ⇧ │SK ⌘ │  ▽  │CAPW │SCRN │    │  0  │  1  │  2  │  3  │  ▽  │ ENT │
+│  ▽  │  ·  │ BT0 │ BT1 │ BT2 │ BCL │    │HOME │PGDN │PGUP │ END │  ·  │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │ ▽   │ ▽   │ ▽   │    │ ▽   │ ▽   │ ▽   │
+                  │  ·  │  ▽  │  ▽  │    │MUTE │VOL- │VOL+ │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
-- `Z bot` = `SK ⇧`, `X bot` = `SK ⌘` — mouse-chord mods (right hand on mouse, tap SL 1 → tap mod → click)
-- `SL 3` top-left = sole access path to L3 (tap SL 1 → tap SL 3 → tap target, layer auto-clears)
-
 ---
 
-## L2 — Sym (tap `SL 2` sticky, or hold)
+## L2 — SYM_L (hold right-inner thumb; left hand types)
+
+Left hand carries symbols (matches previous keymap's left sym half). Right home row = SK mod mirror. Left thumbs host cross-hand-token macros `->` `=>` `!=`.
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│  ▽  │  !  │  @  │  #  │  $  │  %  │    │  ^  │  &  │  *  │  =  │  |  │  `  │
+│  ▽  │  !  │  @  │  #  │  $  │  %  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  \  │  {  │  [  │  (  │  +  │    │  <  │  ?  │  _  │  :  │  ;  │  '  │
+│  ▽  │  \  │  {  │  [  │  (  │  +  │    │  ·  │SK ⌃ │SK ⇧ │SK ⌥ │SK ⌘ │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  ~  │  }  │  ]  │  )  │  -  │    │  >  │  "  │  ,  │  .  │  /  │  ▽  │
+│  ▽  │  ~  │  }  │  ]  │  )  │  -  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │ ▽   │ ▽   │ ▽   │    │ ▽   │ ▽   │ ▽   │
+                  │ ->  │ =>  │ !=  │    │  ▽  │  ▽  │  ▽  │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
+One-hand operations: `()` `{}` `[]` all left-only.
+
 ---
 
-## L3 — Adjust (via L1 → `SL 3`)
+## L3 — NUM (hold right-outer thumb; left hand types)
+
+Numpad cluster on left (1-3 bot, 4-6 home, 7-9 top, 0 on thumb). Right home row = SK mod mirror.
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
-│ F1  │ F2  │ F3  │ F4  │ F5  │ F6  │    │ F7  │ F8  │ F9  │ F10 │ F11 │ F12 │
+│  ▽  │  [  │  7  │  8  │  9  │  ]  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│BTCLR│ BT0 │ BT1 │ BT2 │ BT3 │ BT4 │    │MUTE │VOL- │VOL+ │PREV │PLAY │NEXT │
+│  ▽  │  ;  │  4  │  5  │  6  │  =  │    │  ·  │SK ⌃ │SK ⇧ │SK ⌥ │SK ⌘ │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│RESET│BOOT │  ▽  │  ▽  │  ▽  │  ▽  │    │  ▽  │  ▽  │  ▽  │  ▽  │BOOT │RESET│
+│  ▽  │  `  │  1  │  2  │  3  │  \  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │ ▽   │ ▽   │ ▽   │    │ ▽   │ ▽   │ ▽   │
+                  │  .  │  0  │  -  │    │  ▽  │  ▽  │  ▽  │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
 ---
 
-## Notes
+## L4 — SYM_R (hold left-inner thumb; right hand types)
 
-- **Aerospace**: hold `SK ⌥` (left pinky) + mash hjkl on right hand → cross-hand chord
-- **Tmux prefix** `⌃+SPC`: hold `ESC/⌃` (left outer mid) → tap SPACE
-- **Sticky stacking**: tap `SK ⌘`, tap `SK ⇧`, tap letter → ⌘+⇧+letter
-- **Hold sticky for repeat**: holding the sticky key = acts as held mod
+Right hand carries symbols (matches previous keymap's right sym half). Left home row = SK mod mirror. Right thumbs host comparison-operator macros `<=` `==` `>=`.
+
+```
+┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  ▽  │  ·  │  ·  │  ·  │  ·  │  ·  │    │  ^  │  &  │  *  │  =  │  |  │  `  │
+├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ▽  │SK ⌘ │SK ⌥ │SK ⇧ │SK ⌃ │  ·  │    │  <  │  ?  │  _  │  :  │  ;  │  '  │
+├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ▽  │  ·  │  ·  │  ·  │  ·  │  ·  │    │  >  │  "  │  ,  │  .  │  /  │  ▽  │
+└─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
+                  │  ▽  │  ▽  │  ▽  │    │ <=  │ ==  │ >=  │
+                  └─────┴─────┴─────┘    └─────┴─────┴─────┘
+```
+
+One-hand operations: `""` `''` `<>` `::` `||` all right-only.
+
+---
+
+## Two-character token coverage
+
+| Token   | Where                  | How                          |
+|---------|------------------------|------------------------------|
+| `()`    | SYM_L left             | tap `(` tap `)`              |
+| `{}`    | SYM_L left             | tap `{` tap `}`              |
+| `[]`    | SYM_L left             | tap `[` tap `]`              |
+| `""`    | SYM_R right            | tap `"` twice                |
+| `''`    | SYM_R right            | tap `'` twice                |
+| `<>`    | SYM_R right            | tap `<` tap `>`              |
+| `::`    | SYM_R right            | tap `:` twice                |
+| `\|\|`  | SYM_R right            | tap `\|` twice               |
+| `&&`    | SYM_R right            | tap `&` twice                |
+| `->`    | SYM_L thumb macro      | tap macro                    |
+| `=>`    | SYM_L thumb macro      | tap macro                    |
+| `!=`    | SYM_L thumb macro      | tap macro                    |
+| `<=`    | SYM_R thumb macro      | tap macro                    |
+| `==`    | SYM_R thumb macro      | tap macro                    |
+| `>=`    | SYM_R thumb macro      | tap macro                    |
+
+---
+
+## Behaviors
+
+### HRM (base home row)
+
+- `flavor = "balanced"`
+- `tapping-term-ms = 200`
+- `require-prior-idle-ms = 150`
+- `hold-trigger-key-positions` = opposite-hand keys only (kills `st`, `nt`, `ne` misfires)
+- `quick-tap-ms = 175`
+
+### `lt` (layer tap-hold for thumbs)
+
+Custom hold-tap: tap → sticky-layer, hold → momentary-layer.
+
+### `SK` (sticky mods)
+
+ZMK built-in `&sk` with `quick-release` so holding behaves as held-mod.
+
+---
 
 ## Build / flash
 
-- Docker: `zmkfirmware/zmk-build-arm:stable`. West workspace already at repo root (`.west/` + `zmk/` + `zephyr/` + `modules/` cloned).
-- Build: `docker run --rm -v $PWD:/workspace -w /workspace zmkfirmware/zmk-build-arm:stable bash -c 'west build -d build/left ...'`
-- Outputs to `firmware/*.uf2`
+- Docker: `zmkfirmware/zmk-build-arm:stable`. West workspace at repo root (`.west/` + `zmk/` + `zephyr/` + `modules/` cloned).
+- Build both halves (clean):
+  ```
+  docker run --rm -v "$PWD":/workspace -w /workspace zmkfirmware/zmk-build-arm:stable bash -c '
+    west zephyr-export &&
+    west build -d build/left  -s zmk/app -b nice_nano_v2 -S studio-rpc-usb-uart -- -DSHIELD="corne_left nice_view_adapter nice_view"  -DZMK_CONFIG=/workspace/config &&
+    west build -d build/right -s zmk/app -b nice_nano_v2                          -- -DSHIELD="corne_right nice_view_adapter nice_view" -DZMK_CONFIG=/workspace/config &&
+    cp build/left/zephyr/zmk.uf2  firmware/corne_left.uf2 &&
+    cp build/right/zephyr/zmk.uf2 firmware/corne_right.uf2
+  '
+  ```
+- The `west zephyr-export` step registers the Zephyr CMake package so `find_package(Zephyr)` resolves; required after pristine builds.
+- Incremental rebuilds (after just changing keymap): drop `west zephyr-export` and add `-s zmk/app` to the `west build` invocations only if pristine.
 - Flash: double-tap reset on half → `NICENANO` mounts → `cp firmware/corne_<side>.uf2 /Volumes/NICENANO/`
 - ZMK Studio enabled on left (snippet `studio-rpc-usb-uart`) — direct flash works for keymap updates, no settings_reset needed
 
-## Open concerns
+## Open Concerns
 
-- TAB / ESC on left outer column = pinky reach
-- `SK ⌘` on right outer bot pinky = sustained cmd-hold awkward
-- DEL on top-right outer pinky corner
-- `ESC/⌃` mod-tap: tune flavor (`tap-preferred` default), watch for misfires on vim `<C-…>` chords
+- HYP requires Raycast/Hammerspoon/AeroSpace binding to be useful.
+- DEL on top-right outer corner = pinky reach. Acceptable since DEL is occasional.
+- `` ` `` and `'` on SYM_R right outer cols override base DEL/ENT while SYM_R held. Rarely an issue.
+- `,` `.` `/` on SYM_R right-bot duplicate base — harmless redundancy.
+- No mouse layer. Trackpad assumed.
+- HRM with `require-prior-idle-ms=150` may need tuning; first letter after typing burst won't trigger HRM.
