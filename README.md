@@ -93,21 +93,21 @@ One-hand operations: `()` `{}` `[]` all left-only.
 
 ## L3 — NUM (hold right-inner thumb; left hand types)
 
-Numpad + math ops on left. Digits: 1-3 bot, 4-6 home, 7-9 top, 0 on thumb. Ops: `/ *` top-inner, `= +` home-inner, `, -` on outer pinky / thumb. Right home row = SK mod mirror.
+Numpad + math ops on left. Digits: 1-3 bot, 4-6 home, 7-9 top, 0 on thumb. Ops on index-inner col: `* + -` (matches SYM_L `-` position at bot-inner). `= ` on thumb, `%` on pinky home. Right home row = SK mod mirror.
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
 │  ▽  │  /  │  7  │  8  │  9  │  *  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  =  │  4  │  5  │  6  │  +  │    │  ·  │SK ⇧ │SK ⌃ │SK ⌥ │SK ⌘ │  ▽  │
+│  ▽  │  %  │  4  │  5  │  6  │  +  │    │  ·  │SK ⇧ │SK ⌃ │SK ⌥ │SK ⌘ │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  ,  │  1  │  2  │  3  │  ·  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
+│  ▽  │  ,  │  1  │  2  │  3  │  -  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │  .  │  0  │  -  │    │  ▽  │  ▽  │  ▽  │
+                  │  .  │  0  │  =  │    │  ▽  │  ▽  │  ▽  │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
-`[` `]` `;` `` ` `` `\` moved off NUM — access them via SYM_L (`[ ]` on left index/inner top+bot, `;` `` ` `` `\` on SYM_R).
+`-` at bot-inner mirrors SYM_L position. `[` `]` `;` `` ` `` `\` accessible on SYM_L/SYM_R.
 
 ---
 
