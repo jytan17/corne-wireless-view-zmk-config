@@ -11,22 +11,23 @@ This README documents the **current** layout. Versioned alongside `config/corne.
 - `LT N` — layer tap-hold (tap = sticky-layer for next key, hold = momentary layer)
 - `HYP` — Hyper (⌘+⌥+⌃+⇧) for app-launcher / window manager
 - `CAPW` — caps_word (auto-shift letters until space/punct)
+- `SCRN` — `⌘+⇧+4` (mac screenshot / snippet tool)
 - `->` `=>` `!=` `<=` `==` `>=` — macros (emit multiple keys)
 - `▽` — transparent (falls through to base)
 - `·` — none / blank
 
 ## Thumb cluster
 
-Sym layers on **inner** (big) thumbs, mirrored. NAV on left-outer.
+NAV and NUM on **inner** (big) thumbs. Sym layers on outer thumbs.
 
 | Position    | Tap / Hold        | Notes                            |
 |-------------|-------------------|----------------------------------|
-| Left-outer  | `LT 1` NAV        | Right hand active when held      |
+| Left-outer  | `LT 4` SYM_R      | Right hand active when held      |
 | Left-mid    | `SPC` plain       |                                  |
-| Left-inner  | `LT 4` SYM_R      | Right hand active when held      |
-| Right-inner | `LT 2` SYM_L      | Left hand active when held       |
+| Left-inner  | `LT 1` NAV        | Right hand active when held      |
+| Right-inner | `LT 3` NUM        | Left hand active when held       |
 | Right-mid   | `BSPC` plain      |                                  |
-| Right-outer | `LT 3` NUM        | Left hand active when held       |
+| Right-outer | `LT 2` SYM_L      | Left hand active when held       |
 
 ---
 
@@ -40,7 +41,7 @@ Sym layers on **inner** (big) thumbs, mirrored. NAV on left-outer.
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
 │ HYP │  Z  │  X  │  C  │  D  │  V  │    │  K  │  H  │  ,  │  .  │  /  │CAPW │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
-                  │LT 1 │ SPC │LT 4 │    │LT 2 │BSPC │LT 3 │
+                  │LT 4 │ SPC │LT 1 │    │LT 3 │BSPC │LT 2 │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
@@ -52,7 +53,7 @@ HRM (hold home-row key):
 
 ---
 
-## L1 — NAV (hold left-outer thumb; right hand types)
+## L1 — NAV (hold left-inner thumb; right hand types)
 
 Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs. Bluetooth on left bottom row. Left home row = SK mod mirror.
 
@@ -62,7 +63,7 @@ Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
 │  ▽  │SK ⌘ │SK ⌥ │SK ⇧ │SK ⌃ │CAPS │    │  ←  │  ↓  │  ↑  │  →  │ INS │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │  ·  │ BT0 │ BT1 │ BT2 │ BCL │    │HOME │PGDN │PGUP │ END │  ·  │  ▽  │
+│  ▽  │  ·  │ BT0 │ BT1 │ BT2 │ BCL │    │HOME │PGDN │PGUP │ END │SCRN │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
                   │  ·  │  ▽  │  ▽  │    │MUTE │VOL- │VOL+ │
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
@@ -70,7 +71,7 @@ Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs
 
 ---
 
-## L2 — SYM_L (hold right-inner thumb; left hand types)
+## L2 — SYM_L (hold right-outer thumb; left hand types)
 
 Left hand carries symbols (matches previous keymap's left sym half). Right home row = SK mod mirror. Left thumbs host cross-hand-token macros `->` `=>` `!=`.
 
@@ -90,7 +91,7 @@ One-hand operations: `()` `{}` `[]` all left-only.
 
 ---
 
-## L3 — NUM (hold right-outer thumb; left hand types)
+## L3 — NUM (hold right-inner thumb; left hand types)
 
 Numpad cluster on left (1-3 bot, 4-6 home, 7-9 top, 0 on thumb). Right home row = SK mod mirror.
 
@@ -108,7 +109,7 @@ Numpad cluster on left (1-3 bot, 4-6 home, 7-9 top, 0 on thumb). Right home row 
 
 ---
 
-## L4 — SYM_R (hold left-inner thumb; right hand types)
+## L4 — SYM_R (hold left-outer thumb; right hand types)
 
 Right hand carries symbols (matches previous keymap's right sym half). Left home row = SK mod mirror. Right thumbs host comparison-operator macros `<=` `==` `>=`.
 

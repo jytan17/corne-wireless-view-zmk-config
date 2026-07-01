@@ -117,7 +117,7 @@
    &kp TAB     &kp Q       &kp W       &kp F       &kp P       &kp B            &kp J     &kp L       &kp U       &kp Y       &kp SQT     &kp DEL
    &kp ESC     &hml LGUI A &hml LALT R &hml LSHFT S &hml LCTRL T &kp G           &kp M     &hmr LCTRL N &hmr LSHFT E &hmr LALT I &hmr LGUI O &kp RET
    &kp HYPER   &kp Z       &kp X       &kp C       &kp D       &kp V            &kp K     &kp H       &kp COMMA   &kp DOT     &kp FSLH    &caps_word
-                                       &lth NAV NAV &kp SPACE &lth SYM_R SYM_R        &lth SYM_L SYM_L &kp BSPC &lth NUM NUM
+                                       &lth SYM_R SYM_R &kp SPACE &lth NAV NAV        &lth NUM NUM &kp BSPC &lth SYM_L SYM_L
                         >;
                 };
 
@@ -131,7 +131,7 @@
                         bindings = <
    &trans  &none      &none      &none      &none      &none              &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)  &trans
    &trans  &skq LGUI  &skq LALT  &skq LSHFT &skq LCTRL &caps_word         &kp LEFT      &kp DOWN   &kp UP     &kp RIGHT  &kp INS    &trans
-   &trans  &none      &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_CLR   &kp HOME      &kp PG_DN  &kp PG_UP  &kp END    &none      &trans
+   &trans  &none      &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_CLR   &kp HOME      &kp PG_DN  &kp PG_UP  &kp END    &kp LG(LS(N4)) &trans
                                  &none      &trans     &trans             &kp C_MUTE    &kp C_VOL_DN &kp C_VOL_UP
                         >;
                 };
