@@ -1,12 +1,11 @@
 # Corne Keymap
 
-Personal Corne keymap. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas. ZMK Studio enabled (left side). Miryoku-inspired: home-row mods, sticky everything, split sym layers.
+Personal Corne keymap. Mac. vim, tmux, aerospace, py/rust. Colemak-DH alphas. ZMK Studio enabled (left side). Miryoku-inspired: sticky mods, split sym layers, mouse layer.
 
 This README documents the **current** layout. Versioned alongside `config/corne.keymap` — each layout iteration updates both.
 
 ## Conventions
 
-- `HRM` — home-row mod (hold home-row letter = mod, tap = letter). GACS mapping (⇧ on index).
 - `SK ⌘ ⌥ ⌃ ⇧` — sticky mod (tap = oneshot for next key, hold = held mod)
 - `LT N` — layer tap-hold (tap = sticky-layer for next key, hold = momentary layer)
 - `HYP` — Hyper (⌘+⌥+⌃+⇧) for app-launcher / window manager
@@ -45,23 +44,19 @@ NAV and NUM on **inner** (big) thumbs. Sym layers on outer thumbs.
                   └─────┴─────┴─────┘    └─────┴─────┴─────┘
 ```
 
-HRM (hold home-row key):
-
-```
-  A=⌘   R=⌥   S=⌃   T=⇧                  N=⇧   E=⌃   I=⌥   O=⌘
-```
+Home row is plain alphas — no HRM. Modifiers come from sticky mods on layers.
 
 ---
 
 ## L1 — NAV (hold left-inner thumb; right hand types)
 
-Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs. Bluetooth on left bottom row. Left home row = SK mod mirror.
+Arrows on M/N/E/I (vim HJKL feel). Page nav on bottom row. Media on right thumbs. Bluetooth on left bottom row. Left home row = SK mod mirror. `MOU` at G-slot = hold to activate MOUSE layer.
 
 ```
 ┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
 │  ▽  │ BCL │  ·  │  ·  │  ·  │  ·  │    │ RDO │ PST │ CPY │ CUT │ UND │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
-│  ▽  │SK ⌘ │SK ⌥ │SK ⌃ │SK ⇧ │CAPS │    │  ←  │  ↓  │  ↑  │  →  │ INS │  ▽  │
+│  ▽  │SK ⌘ │SK ⌥ │SK ⌃ │SK ⇧ │ MOU │    │  ←  │  ↓  │  ↑  │  →  │ INS │  ▽  │
 ├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
 │  ▽  │ BT0 │ BT1 │ BT2 │ BT3 │ BT4 │    │HOME │PGDN │PGUP │ END │SCRN │  ▽  │
 └─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
@@ -131,6 +126,28 @@ One-hand operations: `""` `''` `<>` `::` `||` all right-only.
 
 ---
 
+## L5 — MOUSE (hold NAV thumb + G; right hand mouses)
+
+Nested layer, reached only from NAV. Hold left-inner-thumb (NAV) then hold G-slot to activate — release either to exit. Right hand does pointer / scroll / click. Left home row = SK mod mirror for `⌘-click`, `⇧-click`, `⌥-click`, `⌃-click`.
+
+```
+┌─────┬─────┬─────┬─────┬─────┬─────┐    ┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  ▽  │  ·  │  ·  │  ·  │  ·  │  ·  │    │  ·  │  ·  │  ·  │  ·  │  ·  │  ▽  │
+├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ▽  │SK ⌘ │SK ⌥ │SK ⌃ │SK ⇧ │  ▽  │    │ M←  │ M↓  │ M↑  │ M→  │  ·  │  ▽  │
+├─────┼─────┼─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┼─────┼─────┤
+│  ▽  │  ·  │  ·  │  ·  │  ·  │  ·  │    │ S←  │ S↓  │ S↑  │ S→  │  ·  │  ▽  │
+└─────┴─────┴─────┼─────┼─────┼─────┤    ├─────┼─────┼─────┼─────┴─────┴─────┘
+                  │  ▽  │  ▽  │  ▽  │    │ LMB │ MMB │ RMB │
+                  └─────┴─────┴─────┘    └─────┴─────┴─────┘
+```
+
+- `M← M↓ M↑ M→` — pointer move (mirrors NAV arrow keys)
+- `S← S↓ S↑ S→` — scroll wheel
+- `LMB MMB RMB` — left / middle / right click on right thumbs
+
+---
+
 ## Two-character token coverage
 
 | Token   | Where                  | How                          |
@@ -154,14 +171,6 @@ One-hand operations: `""` `''` `<>` `::` `||` all right-only.
 ---
 
 ## Behaviors
-
-### HRM (base home row)
-
-- `flavor = "balanced"`
-- `tapping-term-ms = 200`
-- `require-prior-idle-ms = 150`
-- `hold-trigger-key-positions` = opposite-hand keys only (kills `st`, `nt`, `ne` misfires)
-- `quick-tap-ms = 175`
 
 ### `lt` (layer tap-hold for thumbs)
 
@@ -197,5 +206,4 @@ ZMK built-in `&sk` with `quick-release` so holding behaves as held-mod.
 - DEL on top-right outer corner = pinky reach. Acceptable since DEL is occasional.
 - `` ` `` and `'` on SYM_R right outer cols override base DEL/ENT while SYM_R held. Rarely an issue.
 - `,` `.` `/` on SYM_R right-bot duplicate base — harmless redundancy.
-- No mouse layer. Trackpad assumed.
-- HRM with `require-prior-idle-ms=150` may need tuning; first letter after typing burst won't trigger HRM.
+- MOUSE layer trigger is same-hand grip (left thumb + left index) — fine for short bursts, tiring for long drags.
