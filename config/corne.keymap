@@ -17,6 +17,7 @@
 #define NUM   3
 #define SYM_R 4
 #define MOUSE 5
+#define BT    6
 
 #define HYPER LS(LC(LA(LGUI)))
 
@@ -113,15 +114,15 @@
 
                 nav_layer {
 // -----------------------------------------------------------------------------------------
-// |  ▽  | BCL |  ·  |  ·  |  ·  |  ·  |   | RDO | PST | CPY | CUT | UND |  ▽   |
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   | RDO | PST | CPY | CUT | UND |  ▽   |
 // |  ▽  |SK⌘  |SK⌥  |SK⌃  |SK⇧  | MOU |   |  ←  |  ↓  |  ↑  |  →  | INS |  ▽   |
-// |  ▽  | BT0 | BT1 | BT2 | BT3 | BT4 |   |HOME |PGDN |PGUP | END |SCRN |  ▽   |
+// |  ▽  | BT⇧ |  ·  |  ·  |  ·  |  ·  |   |HOME |PGDN |PGUP | END |SCRN |  ▽   |
 //                   |  ·  |  ▽  |  ▽  |   |MUTE |VOL- |VOL+ |
                         display-name = "Nav";
                         bindings = <
-   &trans  &bt BT_CLR &none      &none      &none      &none              &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)  &trans
+   &trans  &none      &none      &none      &none      &none              &kp LG(LS(Z)) &kp LG(V)  &kp LG(C)  &kp LG(X)  &kp LG(Z)  &trans
    &trans  &skq LGUI  &skq LALT  &skq LCTRL &skq LSHFT &mo MOUSE          &kp LEFT      &kp DOWN   &kp UP     &kp RIGHT  &kp INS    &trans
-   &trans  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4  &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp LG(LS(N4)) &trans
+   &trans  &mo BT     &none      &none      &none      &none              &kp HOME      &kp PG_DN  &kp PG_UP  &kp END    &kp LG(LS(N4)) &trans
                                  &none      &trans     &trans             &kp C_MUTE    &kp C_VOL_DN &kp C_VOL_UP
                         >;
                 };
@@ -186,8 +187,19 @@
                         >;
                 };
 
-                extra_2 {
-                        status = "reserved";
+                bt_layer {
+// -----------------------------------------------------------------------------------------
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+// |  ▽  |  ·  |  ·  |  ·  |  ·  |  ·  |   | BT0 | BT1 | BT2 | BT3 | BT4 |  ▽   |
+// |  ▽  |  ▽  |  ·  |  ·  |  ·  |  ·  |   |  ·  |  ·  |  ·  |  ·  |  ·  |  ▽   |
+//                   |  ·  |  ▽  |  ▽  |   | CLR |  ·  |  ·  |
+                        display-name = "BT";
+                        bindings = <
+   &trans  &none      &none      &none      &none      &none              &none         &none         &none         &none         &none      &trans
+   &trans  &none      &none      &none      &none      &none              &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4 &trans
+   &trans  &trans     &none      &none      &none      &none              &none         &none         &none         &none         &none      &trans
+                                 &none      &trans     &trans             &bt BT_CLR    &none         &none
+                        >;
                 };
 
                 extra_3 {
